@@ -26,7 +26,7 @@
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Affichage quotidien</h1>
-			<p>Veuillez choisir une salle dans le menu déroulant ci-dessous</p>
+			<p>Veuillez choisir 3 salles dans la liste ci-dessous</p>
 		</div>
 	</div>
 
@@ -34,14 +34,14 @@
 		<div class="row">
 			<div class="col-md-4">
 				<?php
-					echo '<h4>';
-					setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
-					echo strftime("%A %d %B %Y");
-					echo '</h4>';
+				echo '<h4>';
+				setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
+				echo strftime("%A %d %B %Y");
+				echo '</h4>';
 				?>
-				<form action="affichage.php" name="formulaire" method="get">
+				<form action="multi_display.php" name="formulaire" method="get">
 					<div class="form-group">
-						<select class="form-control" name="salle">
+						<select class="form-control" name="salle[]" multiple >
 							<?php
 							require_once('connection.php');
 							$a = "r.id";
@@ -60,12 +60,14 @@
 							}
 							?>
 						</select>
-						<input class="btn btn-default" type="submit" value="Envoyer">
+						<h5>(CTRL + clic)</h5>
 					</div>
+					<button type="submit" class="btn btn-default">Afficher</button>
 				</form>
 			</div>
 		</div>
 	</div>
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
