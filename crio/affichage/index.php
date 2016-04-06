@@ -10,8 +10,8 @@
 	<link rel="icon" href="img/favicon.ico">
 	<title>Crio Multimedia</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/navbar-static-top.css" rel="stylesheet">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/sticky-footer-navbar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -67,7 +67,13 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	</div><!-- /.row -->
+
+	<footer class="footer">
+      <div class="container">
+        <p class="text-muted">© 2016 Centre de Ressources Informatiques Opérationnelles Multimedia - Université Dauphine</p>
+      </div>
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
