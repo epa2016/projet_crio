@@ -15,7 +15,7 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-default navbar-static-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="index.php"><img style="logo" alt="Logo" src="img/logo.png" class="pull-left"></a>
