@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 	<meta charset="">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,27 +22,27 @@
 	</nav>
 	<?php
 	ob_start();
-	#Création d'une connection à la base de données
+	#CrÃ©ation d'une connection Ã  la base de donnÃ©es
 	require_once('connection.php');
 
 		//Variables temporelles
-		$botd = mktime(0, 0, 0, date('m'), date('d'), date('Y')); #Timestamp du début du jour
-		$eotd =  mktime(23, 59, 59, date('m'), date('d'), date('Y')); #Timestamp de la fin de journée
-		$book_start = $botd + (10*60*60); //La variable $book_start est initialisée à la date de début de réservation ici la date du début du jour + 10h
-		$book_end = $eotd - (2*60*60) - 1; ////La variable $book_end est initialisée à la date de fin de réservation ici la date de fin du jour - 1h59min59s
+		$botd = mktime(0, 0, 0, date('m'), date('d'), date('Y')); #Timestamp du dÃ©but du jour
+		$eotd =  mktime(23, 59, 59, date('m'), date('d'), date('Y')); #Timestamp de la fin de journÃ©e
+		$book_start = $botd + (10*60*60); //La variable $book_start est initialisÃ©e Ã  la date de dÃ©but de rÃ©servation ici la date du dÃ©but du jour + 10h
+		$book_end = $eotd - (2*60*60) - 1; ////La variable $book_end est initialisÃ©e Ã  la date de fin de rÃ©servation ici la date de fin du jour - 1h59min59s
 		
 		if (!empty($_GET['salle'])) {
 			$rooms = $_GET['salle'];
 			//REQUETES SQL
 
-			//Préparation d'une requête pour chaque salle
+			//PrÃ©paration d'une requÃªte pour chaque salle
 			foreach ($rooms as $key => $value) {
 				${"sql_room_".$key} = 'SELECT start_time, end_time, name, create_by FROM mrbs_entry WHERE start_time BETWEEN '.$botd.' AND '.$eotd.' AND room_id='.$value.' ORDER BY start_time';
 				$sql_room[] = ${"sql_room_".$key};
 			}
 			unset($value);
 
-			//Préparation d'une requête pour récupérer le nom de chaque salle
+			//PrÃ©paration d'une requÃªte pour rÃ©cupÃ©rer le nom de chaque salle
 			foreach ($rooms as $key => $value) {
 				${"sql_name_room_".$key} =  'SELECT room_name FROM mrbs_room WHERE id = '.$value.''; 
 				$sql_name_room[] = ${"sql_name_room_".$key};
@@ -63,7 +63,7 @@
 			}
 			unset($value);
 
-			//Récoupération du nom des salles pour l'en tete du tableau
+			//RÃ©coupÃ©ration du nom des salles pour l'en tete du tableau
 			foreach ($req_name_room as $key => $value) {
 				${"s".$key} = $value->fetch(PDO::FETCH_OBJ);
 				${"nom_salle_".$key} = ${"s".$key}->room_name;
