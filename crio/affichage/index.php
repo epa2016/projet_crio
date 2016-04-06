@@ -26,7 +26,7 @@
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Affichage quotidien</h1>
-			<p>Veuillez choisir 3 salles dans la liste ci-dessous</p>
+			<p>Veuillez choisir une ou plusieurs salles dans la liste ci-dessous</p>
 		</div>
 	</div>
 
