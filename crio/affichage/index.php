@@ -1,8 +1,8 @@
-﻿
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="">
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
@@ -34,6 +34,7 @@
 		<div class="row">
 			<div class="col-md-4">
 				<?php
+				header('content-type: text/html; charset=utf-8');
 				echo '<h4>';
 				setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 				echo strftime("%A %d %B %Y");

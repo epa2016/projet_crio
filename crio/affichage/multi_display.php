@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="">
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="img/favicon.ico">
@@ -22,6 +22,8 @@
 	</nav>
 	<?php
 	ob_start();
+	header('content-type: text/html; charset=utf-8');
+
 	#Création d'une connection à la base de données
 	require_once('connection.php');
 
