@@ -81,6 +81,7 @@ $db_tbl_prefix = "mrbs_";
 
 
 $auth["type"] = "db_ext"; // Choix de l'authentification
+//$auth["admin"][] = "dom10";
 
 $auth['db_ext']['db_system'] = 'mysqli'; /* Or 'mysqli', 'pgsql' */
 $auth['db_ext']['db_host'] = 'localhost'; //Hote de la bdd
