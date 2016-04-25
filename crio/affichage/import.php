@@ -39,6 +39,7 @@ Veuillez lire attentivement, les consignes suivantes :
 	<li>Le fichier .csv doit contenir uniquement les colonnes "user" et "password"</li>
 	<li>Le séparateur doit être une virgule ","</li>
 	<li>Faites attention à ce qu'il n'y ait pas d'espace dans le fichier</li>
+	<li>Ajouter un utilisateur avec l'identifiant "administrateur" pour définir l'administrateur de MRBS</li>
 </ul>
 
 </div>

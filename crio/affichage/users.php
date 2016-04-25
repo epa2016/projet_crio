@@ -3,6 +3,11 @@
 	require 'inc/functions.php';
 	require_once 'inc/db.php';
 	logged_only();
+?>
+
+<h1>Affichage des 100 premiers utilisateurs</h1>
+
+<?php
 
 	$sql = 'SELECT user, password FROM crio_user LIMIT 100';
 	$table_user = $dbh->query($sql);
