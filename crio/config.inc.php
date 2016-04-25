@@ -61,9 +61,9 @@ $db_database = "mrbs";
 // multiple schemas.
 //$db_schema = "public";
 // Database login user name:
-$db_login = "root";
+$db_login = "mrbscrio";
 // Database login password:
-$db_password = '';
+$db_password = 'mrbscrio2016';
 // Prefix for table names.  This will allow multiple installations where only
 // one database is available
 $db_tbl_prefix = "mrbs_";
@@ -81,13 +81,13 @@ $db_tbl_prefix = "mrbs_";
 
 
 $auth["type"] = "db_ext"; // Choix de l'authentification
-//$auth["admin"][] = "dom10";
+$auth["admin"][] = "dom10";
 
 $auth['db_ext']['db_system'] = 'mysqli'; /* Or 'mysqli', 'pgsql' */
 $auth['db_ext']['db_host'] = 'localhost'; //Hote de la bdd
-$auth['db_ext']['db_username'] = 'root'; //identifiant utilisateur de la bdd
-$auth['db_ext']['db_password'] = ''; //mdp de la bdd
-$auth['db_ext']['db_name'] = 'test'; //nom de la base de données utilisateur
+$auth['db_ext']['db_username'] = 'mrbscrio'; //identifiant utilisateur de la bdd
+$auth['db_ext']['db_password'] = 'mrbscrio2016'; //mdp de la bdd
+$auth['db_ext']['db_name'] = 'mrbs'; //nom de la base de données utilisateur
 $auth['db_ext']['db_table'] = 'crio_user'; //nom de la table utilisateur
 $auth['db_ext']['column_name_username'] = 'user'; //colonne identifiant utilisateur
 $auth['db_ext']['column_name_password'] = 'password'; //colonne mdp utilisateur

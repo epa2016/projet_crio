@@ -1,3 +1,4 @@
+</div>
 <footer class="footer">
       <div class="container">
         <p class="text-muted">© 2016 Centre de Ressources Informatiques Opérationnelles Multimedia - Université Dauphine</p>

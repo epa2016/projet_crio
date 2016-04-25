@@ -1,10 +1,59 @@
-<?php require 'inc/header.php';?>
+<?php
+
+  if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+    require 'inc/functions.php';
+	logged_only();
+  }
+
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="img/favicon.ico">
+	<title>Crio Multimedia</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/sticky-footer-navbar.css" rel="stylesheet">
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            		<span class="sr-only">Toggle navigation</span>
+            		<span class="icon-bar"></span>
+            		<span class="icon-bar"></span>
+            		<span class="icon-bar"></span>
+          		</button>
+				<a class="navbar-brand" href="index.php"><img style="logo" alt="Logo" src="img/logo.png" class="pull-left"></a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+
+	<?php if(isset($_SESSION['flash'])): ?>
+    	<?php foreach ($_SESSION['flash'] as $type => $message): ?>
+        	<div class="alert alert-<?= $type; ?>">
+        		<?= $message; ?>
+        	</div>
+      	<?php endforeach ?>
+      	<?php unset($_SESSION['flash']);?>
+    <?php endif ?>
+
 	<?php
 	ob_start();
 	header('content-type: text/html; charset=utf-8');
 
 	#Création d'une connection à la base de données
-	require_once('connection.php');
+	require_once('inc/db.php');
 
 		//Variables temporelles
 		$botd = mktime(0, 0, 0, date('m'), date('d'), date('Y')); #Timestamp du début du jour
@@ -44,17 +93,18 @@
 			}
 			unset($value);
 
-			//Récoupération du nom des salles pour l'en tete du tableau
+			//Récupération du nom des salles pour l'en tete du tableau
 			foreach ($req_name_room as $key => $value) {
 				${"s".$key} = $value->fetch(PDO::FETCH_OBJ);
 				${"nom_salle_".$key} = ${"s".$key}->room_name;
 			}
 			unset($value);
 
-			echo '<div class="jumbotron"><div class="container">';
+			/*echo '<div class="jumbotron"><div class="container">';*/
 			setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 			echo '<h3>'.strftime("%A %d %B %Y").'</h3>';
-			echo '</div></div><div class="container"><div class="row"><div class="">';			
+			/*echo '</div></div><div class="container">';*/
+			echo '<div class="row"><div class="">';			
 			echo '<table class="table table-hover"><tr class="active"><th>Horaires</th>';
 
 			foreach ($req_name_room as $key => $value) {

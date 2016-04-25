@@ -1,28 +1,56 @@
-<?php
-//Le chemin d'acces a ton fichier sur le serveur 
-$fichier = fopen("nom_du_fichier.text_ou_.csv", "r"); 
+<?php 
+	require 'inc/header.php';
+	require 'inc/functions.php';
+	require_once 'inc/db.php';
+	logged_only();
 
-//tant qu'on est pas a la fin du fichier : 
-while (!feof($fichier)) 
-{ 
-// On recupere toute la ligne 
-$uneLigne = fgets($fichier, 1024); 
-//On met dans un tableau les differentes valeurs trouvés (ici séparées par un ';') 
-$tableauValeurs = explode(';', $uneLigne); 
-// On crée la requete pour inserer les donner (ici il y a 12 champs donc de [0] a [11]) 
-$sql="INSERT INTO Balance VALUES ('".$tableauValeurs[0]."', '".$tableauValeurs[1]."', '".$tableauValeurs[2]."', '".$tableauValeurs[3]."', '".$tableauValeurs[4]."', '".$tableauValeurs[5]."', '".$tableauValeurs[6]."', '".$tableauValeurs[7]."', '".$tableauValeurs[8]."', '".$tableauValeurs[9]."', '".$tableauValeurs[10]."', '".$tableauValeurs[11]."')"; 
+	if(isset($_POST['submit'])){
+		$fname = $_FILES['sel-csv']['name'];
+		echo 'Nom du fichier uploadé : '.$fname.' ';
+		$chk_ext = explode(".",$fname);
+		if(strtolower(end($chk_ext))=="csv"){
+			$filename = $_FILES['sel-csv']['tmp_name'];
+			$handle = fopen($filename, "r");
+			$truncate = $dbh->prepare("truncate table crio_user")->execute();
+			$flush = $dbh->prepare("flush table crio_user")->execute();
 
-$req=mysql_query($sql)or die (mysql_error()); 
-// la ligne est finie donc on passe a la ligne suivante (boucle) 
-} 
-//vérification et envoi d'une réponse à l'utilisateur 
-if ($req) 
-{ 
-echo"Ajout dans la base de données effectué avec succès"; 
-} 
-else 
-{ 
-echo"Echec dans l'ajout dans la base de données"; 
-} 
-
+		while (($data = fgetcsv($handle, 1000,",")) !== FALSE) {
+				$req = $dbh->prepare("INSERT INTO crio_user SET user =?, password=?");
+				$req->execute([ $data[0], $data[1] ]);
+			}
+			fclose($handle);
+			$_SESSION['flash']['success'] = "Importation terminée avec succès";
+			header('Location:users.php');
+			exit();
+		}
+		else{
+			$_SESSION['flash']['danger'] = "Le format du fichier est incorrect";
+			header('Location:import.php');
+			exit();
+		}
+		
+	}
 ?>
+
+<h1>Mise à jour des utilisateurs</h1>
+<div class="alert alert-danger"> 
+Veuillez lire attentivement, les consignes suivantes :
+<ul>
+	<li>Le fichier .csv doit contenir uniquement les colonnes "user" et "password"</li>
+	<li>Le séparateur doit être une virgule ","</li>
+	<li>Faites attention à ce qu'il n'y ait pas d'espace dans le fichier</li>
+</ul>
+
+</div>
+
+
+<form action="" method="POST" enctype="multipart/form-data">
+	<div class="form-group">
+		<label for="">Selectionner le fichier CSV</label>
+		<input type="file" name="sel-csv"/>
+		<p class="help-block">Fichier .csv / Séparateur : virgule</p>
+	</div>
+	<button type="submit" name="submit" class="btn btn-primary">Importer</button>
+
+
+<?php require'inc/footer.php'; ?>
