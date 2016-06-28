@@ -55,15 +55,10 @@
 	#Création d'une connection à la base de données
 	require_once('inc/db.php');
 
-		$sql_area = 'SELECT MIN(morningstarts) as minimum FROM mrbs_area';
-		$req = $dbh->query($sql_area);
-		$resultat = $req->fetch(PDO::FETCH_OBJ);
-		$min_value = $resultat->minimum;
-
 		//Variables temporelles
 		$botd = mktime(0, 0, 0, date('m'), date('d'), date('Y')); #Timestamp du début du jour
 		$eotd =  mktime(23, 59, 59, date('m'), date('d'), date('Y')); #Timestamp de la fin de journée
-		$book_start = $botd + ($min_value*60*60); //La variable $book_start est initialisée à la date de début de réservation ici la date du début du jour + 10h
+		$book_start = $botd + (10*60*60); //La variable $book_start est initialisée à la date de début de réservation ici la date du début du jour + 10h
 		$book_end = $eotd - (2*60*60) - 1; ////La variable $book_end est initialisée à la date de fin de réservation ici la date de fin du jour - 1h59min59s
 		
 		if (!empty($_GET['salle'])) {
